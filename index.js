@@ -71,7 +71,7 @@ app.get("/auth/github", async(req, res) => {
     // res.send(user);
     res.cookie(`userInfo`,userdata);
     // res.send(user)
-    res.redirect('https://real-talk-video-chat.netlify.app/');
+    res.redirect('https://gilded-taffy-ad9e7e.netlify.app/');
 })
 
 
@@ -91,7 +91,7 @@ app.get('/auth/google/callback',
     // Successful authentication, redirect home.
     res.cookie(`userInfo`,data);
     // res.send(req.user)
-    res.redirect('https://real-talk-video-chat.netlify.app/');
+    res.redirect('https://gilded-taffy-ad9e7e.netlify.app/');
     // res.sendFile(__dirname+"/redirct.html");
   });
 
