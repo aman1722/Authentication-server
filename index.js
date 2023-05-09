@@ -102,7 +102,8 @@ passport.use(new GoogleStrategy({
     const user = new usermodel({
         name,
         email,
-        password: uuidv4()
+        password: uuidv4(),
+        accessToken
     })
     await user.save();
       return cb(null, user);
