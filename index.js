@@ -7,12 +7,14 @@ require("dotenv").config();
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const passport = require("passport");
 const { v4: uuidv4 } = require('uuid');
+const cookieParser = require('cookie-parser')
 
 const app = express();
 
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 app.use("/user", userrouter);
 
@@ -58,17 +60,18 @@ app.get("/auth/github", async(req, res) => {
 
     const userdata = new usermodel({
         name:user.name,
-        email:accessToken.access_token,
-        password:uuidv4()
+        email:`${user.login}@gmail.com`,
+        password:uuidv4(),
+        accessToken:accessToken.access_token,
     });
     await userdata.save();
 
     // res.send(user);
     // res.sendFile(__dirname+"/public/index.html")
     // res.send(user);
-
+    res.cookie(`userInfo`,userdata);
     // res.send(user)
-    res.redirect('https://real-talk-online-chat.netlify.app/');
+    res.redirect('https://real-talk-video-chat.netlify.app/');
 })
 
 
@@ -82,9 +85,14 @@ app.get('/auth/google',
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login',session:false }),
   function(req, res) {
-    console.log(req.user)
+    // console.log(req.user)
+    const data = JSON.stringify(req.user);
+    console.log(data)
     // Successful authentication, redirect home.
-    res.redirect('https://real-talk-online-chat.netlify.app/');
+    res.cookie(`userInfo`,data);
+    // res.send(req.user)
+    res.redirect('https://real-talk-video-chat.netlify.app/');
+    // res.sendFile(__dirname+"/redirct.html");
   });
 
 
