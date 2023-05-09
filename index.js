@@ -66,10 +66,17 @@ app.get("/auth/github", async(req, res) => {
     });
     await userdata.save();
 
+    const cookieOptions = {
+        domain: '.railway.app',
+        path: '/',
+        httpOnly: true,
+        secure: true,
+        maxAge: 3600 // Expires in 1 hour
+      };
     // res.send(user);
     // res.sendFile(__dirname+"/public/index.html")
     // res.send(user);
-    res.cookie(`userInfo`,userdata);
+    res.cookie(`userInfo`,userdata,cookieOptions);
     // res.send(user)
     res.redirect('https://gilded-taffy-ad9e7e.netlify.app/');
 })
@@ -89,7 +96,14 @@ app.get('/auth/google/callback',
     const data = JSON.stringify(req.user);
     console.log(data)
     // Successful authentication, redirect home.
-    res.cookie(`userInfo`,data);
+    const cookieOptions = {
+        domain: '.railway.app',
+        path: '/',
+        httpOnly: true,
+        secure: true,
+        maxAge: 3600 // Expires in 1 hour
+      };
+    res.cookie(`userInfo`,data,cookieOptions);
     // res.send(req.user)
     res.redirect('https://gilded-taffy-ad9e7e.netlify.app/');
     // res.sendFile(__dirname+"/redirct.html");
