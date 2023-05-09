@@ -64,10 +64,11 @@ app.get("/auth/github", async(req, res) => {
     await userdata.save();
 
     // res.send(user);
-    res.sendFile(__dirname+"/public/index.html")
+    // res.sendFile(__dirname+"/public/index.html")
     // res.send(user);
 
     // res.send(user)
+    res.redirect('https://real-talk-online-chat.netlify.app/');
 })
 
 
