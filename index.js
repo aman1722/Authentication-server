@@ -83,7 +83,7 @@ app.get('/auth/google/callback',
   function(req, res) {
     console.log(req.user)
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('https://real-talk-online-chat.netlify.app/');
   });
 
 
@@ -93,7 +93,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:6500/auth/google/callback"
+    callbackURL: "https://authentication-server-production.up.railway.app/auth/google/callback"
   },
   async function(accessToken, refreshToken, profile, cb) {
     let email = profile._json.email;
