@@ -11,16 +11,19 @@ const cookieParser = require('cookie-parser')
 
 const app = express();
 
-
+// middlewares
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+
+//routing
 app.use("/user", userrouter);
 
 
 
 
+// Home route
 app.get("/", (req, res) => {
     res.send("Welcome to Real Talk Authentication server!")
 })
