@@ -76,11 +76,7 @@ app.get("/auth/github", async(req, res) => {
         secure: true,
         maxAge: 3600 // Expires in 1 hour
       };
-    // res.send(user);
-    // res.sendFile(__dirname+"/public/index.html")
-    // res.send(user);
     res.cookie(`userInfo`,userdata,cookieOptions);
-    // res.send(user)
     res.redirect('https://gilded-taffy-ad9e7e.netlify.app/');
 })
 
