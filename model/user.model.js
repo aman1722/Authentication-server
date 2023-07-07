@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 
+
+// user Schema
 const userschema = mongoose.Schema({
     name:{type:String},
     email:{type:String},
@@ -10,6 +12,8 @@ const userschema = mongoose.Schema({
     versionKey:false
 })
 
+
+// user Model
 const usermodel = mongoose.model("user",userschema)
 
 module.exports={usermodel}
